@@ -6,20 +6,18 @@ const orderSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    products: [{
-        productId: {
-            type: mongoose.Schema.Types.ObjectId,
-            require: true,
-        },
-        qty: {
-            type: Number,
-            require: true
-        },
-        price: {
-            type: Number,
-            require: true
-        }
-    }],
+    productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'product',
+    },
+    qty: {
+        type: Number,
+        require: true
+    },
+    price: {
+        type: Number,
+        require: true
+    },
     totalprice: {
         type: Number,
         require: true
@@ -28,6 +26,6 @@ const orderSchema = mongoose.Schema({
         type: String,
         require: true
     }
-})
+}, { versionKey: false })
 const order = mongoose.model('order', orderSchema)
 module.exports = order

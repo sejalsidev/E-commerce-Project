@@ -12,6 +12,6 @@ const categoryDetail = new mongoose.Schema({
         type: String,
         require: true
     }
-})
+}, { versionKey: false })
 const category = mongoose.model('category', categoryDetail)
 module.exports = category

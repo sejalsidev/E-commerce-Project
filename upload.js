@@ -6,7 +6,7 @@ const upload = multer({
             cb(null, "uploads/")
         },
         filename: function (req, file, cb) {
-            cb(null, file.originalname + "-" + Date.now() + ".jpg")
+            cb(null, file.originalname + "-" + Date.now() + ".jpeg")
         }
 
     })

@@ -24,6 +24,6 @@ const productDetail = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'category'
     }
-})
+}, { versionKey: false })
 const product = mongoose.model('product', productDetail)
 module.exports = product

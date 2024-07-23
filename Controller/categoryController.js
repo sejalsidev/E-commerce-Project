@@ -19,6 +19,54 @@ const createCategory = async (req, res) => {
         console.log(error)
     }
 }
+const updateCategory = async (req, res) => {
+    try {
+        const { categoryName, description } = req.body
+        console.log(categoryName, description, "categoryName, description")
+        const imageUrl = req.file.path
+        console.log(req.file, "req.filereq.file")
+        console.log(req.files, "req.filereq.file")
+        console.log(imageUrl, "imageUrlimageUrl")
+        const { id } = req.params
+
+        if (categoryName && description && imageUrl) {
+
+            let dataupdate = await category.findByIdAndUpdate({ _id: id }, {
+                categoryName: categoryName,
+                description: description,
+                imageUrl: imageUrl
+            }, { new: true })
+
+            console.log(dataupdate, "dataupdatedataupdate")
+
+            if (dataupdate) {
+                res.json({ status: 200, message: "update data succesfully", dataupdate })
+            }
+            else {
+                res.json({ status: 404, message: "Not category Updated" })
+            }
+        }
+        else {
+            return res.json({ status: 400, message: "all fields are required" })
+        }
+    } catch (error) {
+        console.log(error.message, "errorerrorerror")
+        return res.json({ status: 400, message: "all fields are required" })
+    }
+}
+
+const deleteCategory = async (req, res) => {
+    const { id } = req.params
+    let data = await category.findByIdAndDelete({ _id: id })
+    if (data) {
+        res.json({ status: 200, message: "delete record successfully" })
+    }
+    else {
+        res.json({ status: 400, message: "Not record deleted" })
+    }
+}
 module.exports = {
-    createCategory
+    createCategory,
+    updateCategory,
+    deleteCategory
 }
