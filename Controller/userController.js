@@ -23,6 +23,21 @@ const createUser = async (req, res) => {
 
 }
 
+const getUser = async (req, res) => {
+
+    try {
+        const userDetail = await user.find()
+        console.log(userDetail)
+        if (userDetail) {
+            res.json({ status: 200, message: "get data success", userDetail })
+        }
+        else {
+            res.json({ Status: 400, message: "not get data" })
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 const updateUser = async (req, res) => {
     try {
         const { userName, email, password } = req.body
@@ -135,7 +150,8 @@ module.exports = {
     updateUser,
     deleteUser,
     register,
-    login
+    login,
+    getUser
 }
 
 

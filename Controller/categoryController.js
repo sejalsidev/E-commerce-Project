@@ -10,10 +10,23 @@ const createCategory = async (req, res) => {
                 description: description,
                 imageUrl: imageUrl
             })
-            res.json({ status: 200, message: "success" })
+            res.json({ status: 200, message: "success", data: categoryData })
         }
         else {
             res.json("all fields are required")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+const getcategories = async (req, res) => {
+    try {
+        let categoryData = await category.find()
+        if (categoryData) {
+            res.json({ status: 200, message: "get category success", data: categoryData })
+        }
+        else {
+            res.json({ status: 400, message: "Not get category" })
         }
     } catch (error) {
         console.log(error)
@@ -68,5 +81,6 @@ const deleteCategory = async (req, res) => {
 module.exports = {
     createCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    getcategories
 }
